@@ -35,15 +35,15 @@ const features = [
 
 export const FeaturesSection = () => {
   return (
-    <section className="py-20 md:py-28 bg-background">
-      <div className="container">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-background">
+      <div className="container px-4 sm:px-6">
         <SectionHeader
           badge="AI-Powered Tools"
           title="Everything You Need to Land Your Dream Job"
           description="Our suite of AI tools helps you create the perfect application package. Fast, free, and privacy-focused."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <FeatureCard
               key={feature.href}

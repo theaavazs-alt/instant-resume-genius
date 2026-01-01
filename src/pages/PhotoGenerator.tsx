@@ -105,35 +105,35 @@ const PhotoGenerator = () => {
 
   return (
     <Layout>
-      <section className="py-12 md:py-20">
-        <div className="container">
+      <section className="py-8 sm:py-12 md:py-20">
+        <div className="container px-4 sm:px-6">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto mb-12"
+            className="text-center max-w-3xl mx-auto mb-8 sm:mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
-              <Camera className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-accent/10 text-accent text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+              <Camera className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               AI Photo Generator
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
               Create Professional Headshots
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground">
               Transform any photo into a polished, professional headshot perfect for your resume.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             {/* Upload Section */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
             >
-              <Card className="p-6 md:p-8">
-                <h2 className="text-xl font-semibold mb-6">Upload Your Photo</h2>
+              <Card className="p-4 sm:p-6 md:p-8">
+                <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Upload Your Photo</h2>
                 
                 <div
                   {...getRootProps()}
@@ -147,12 +147,12 @@ const PhotoGenerator = () => {
                   {preview ? (
                     <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                   ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                      <Upload className={`w-12 h-12 mb-4 ${isDragActive ? "text-accent" : "text-muted-foreground"}`} />
-                      <p className="text-lg font-medium mb-1">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-8 text-center">
+                      <Upload className={`w-10 h-10 sm:w-12 sm:h-12 mb-3 sm:mb-4 ${isDragActive ? "text-accent" : "text-muted-foreground"}`} />
+                      <p className="text-base sm:text-lg font-medium mb-1">
                         {isDragActive ? "Drop your photo here" : "Drag & drop your photo"}
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs sm:text-sm text-muted-foreground">
                         or click to browse (PNG, JPG, WEBP)
                       </p>
                     </div>
@@ -183,7 +183,7 @@ const PhotoGenerator = () => {
                 <Button
                   onClick={generatePhoto}
                   disabled={!file || isGenerating}
-                  className="w-full mt-6"
+                  className="w-full mt-4 sm:mt-6"
                   variant="accent"
                   size="lg"
                 >
@@ -208,13 +208,13 @@ const PhotoGenerator = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <Card className="p-6 md:p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold">Generated Headshot</h2>
+              <Card className="p-4 sm:p-6 md:p-8">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+                  <h2 className="text-lg sm:text-xl font-semibold">Generated Headshot</h2>
                   {generatedImage && (
                     <Button onClick={downloadImage} variant="accent" size="sm">
-                      <Download className="w-4 h-4 mr-2" />
-                      Download
+                      <Download className="w-4 h-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Download</span>
                     </Button>
                   )}
                 </div>
@@ -223,17 +223,17 @@ const PhotoGenerator = () => {
                   {generatedImage ? (
                     <img src={generatedImage} alt="Generated" className="w-full h-full object-cover" />
                   ) : (
-                    <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-8">
-                      <ImageIcon className="w-16 h-16 mb-4 opacity-20" />
-                      <p className="text-lg font-medium mb-2">No Photo Yet</p>
-                      <p className="text-sm">
+                    <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-6 sm:p-8">
+                      <ImageIcon className="w-12 h-12 sm:w-16 sm:h-16 mb-3 sm:mb-4 opacity-20" />
+                      <p className="text-base sm:text-lg font-medium mb-1 sm:mb-2">No Photo Yet</p>
+                      <p className="text-xs sm:text-sm">
                         Upload a photo and click "Generate" to create your professional headshot.
                       </p>
                     </div>
                   )}
                 </div>
 
-                <p className="text-sm text-muted-foreground text-center mt-4">
+                <p className="text-xs sm:text-sm text-muted-foreground text-center mt-3 sm:mt-4">
                   Your photos are processed securely and never stored.
                 </p>
               </Card>
