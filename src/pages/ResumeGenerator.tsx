@@ -217,19 +217,19 @@ const ResumeGenerator = () => {
                   <TabsList className="grid w-full grid-cols-4 mb-4 sm:mb-6 h-auto p-1">
                     <TabsTrigger value="personal" className="flex items-center justify-center gap-1 text-[10px] sm:text-xs md:text-sm py-2 px-1 sm:px-2">
                       <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      <span className="hidden xs:inline sm:inline">Personal</span>
+                      <span className="hidden sm:inline">Personal</span>
                     </TabsTrigger>
                     <TabsTrigger value="experience" className="flex items-center justify-center gap-1 text-[10px] sm:text-xs md:text-sm py-2 px-1 sm:px-2">
                       <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      <span className="hidden xs:inline sm:inline">Exp</span>
+                      <span className="hidden sm:inline">Experience</span>
                     </TabsTrigger>
                     <TabsTrigger value="education" className="flex items-center justify-center gap-1 text-[10px] sm:text-xs md:text-sm py-2 px-1 sm:px-2">
                       <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      <span className="hidden xs:inline sm:inline">Edu</span>
+                      <span className="hidden sm:inline">Education</span>
                     </TabsTrigger>
                     <TabsTrigger value="skills" className="flex items-center justify-center gap-1 text-[10px] sm:text-xs md:text-sm py-2 px-1 sm:px-2">
                       <Wrench className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      <span className="hidden xs:inline sm:inline">Skills</span>
+                      <span className="hidden sm:inline">Skills</span>
                     </TabsTrigger>
                   </TabsList>
 
