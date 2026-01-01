@@ -185,51 +185,51 @@ const ResumeGenerator = () => {
 
   return (
     <Layout>
-      <section className="py-12 md:py-20">
-        <div className="container">
+      <section className="py-8 sm:py-12 md:py-20">
+        <div className="container px-4 sm:px-6">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto mb-12"
+            className="text-center max-w-3xl mx-auto mb-8 sm:mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
-              <FileText className="w-4 h-4" />
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-accent/10 text-accent text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+              <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               AI Resume Generator
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
               Create Your Professional Resume
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground px-2">
               Fill in your details and let AI craft an ATS-optimized resume for you.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             {/* Form Section */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
             >
-              <Card className="p-6 md:p-8">
+              <Card className="p-4 sm:p-6 md:p-8">
                 <Tabs defaultValue="personal" className="w-full">
-                  <TabsList className="grid w-full grid-cols-4 mb-6">
-                    <TabsTrigger value="personal" className="flex items-center gap-1 text-xs md:text-sm">
-                      <User className="w-4 h-4 hidden sm:block" />
-                      Personal
+                  <TabsList className="grid w-full grid-cols-4 mb-4 sm:mb-6 h-auto p-1">
+                    <TabsTrigger value="personal" className="flex items-center justify-center gap-1 text-[10px] sm:text-xs md:text-sm py-2 px-1 sm:px-2">
+                      <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <span className="hidden xs:inline sm:inline">Personal</span>
                     </TabsTrigger>
-                    <TabsTrigger value="experience" className="flex items-center gap-1 text-xs md:text-sm">
-                      <Briefcase className="w-4 h-4 hidden sm:block" />
-                      Experience
+                    <TabsTrigger value="experience" className="flex items-center justify-center gap-1 text-[10px] sm:text-xs md:text-sm py-2 px-1 sm:px-2">
+                      <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <span className="hidden xs:inline sm:inline">Exp</span>
                     </TabsTrigger>
-                    <TabsTrigger value="education" className="flex items-center gap-1 text-xs md:text-sm">
-                      <GraduationCap className="w-4 h-4 hidden sm:block" />
-                      Education
+                    <TabsTrigger value="education" className="flex items-center justify-center gap-1 text-[10px] sm:text-xs md:text-sm py-2 px-1 sm:px-2">
+                      <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <span className="hidden xs:inline sm:inline">Edu</span>
                     </TabsTrigger>
-                    <TabsTrigger value="skills" className="flex items-center gap-1 text-xs md:text-sm">
-                      <Wrench className="w-4 h-4 hidden sm:block" />
-                      Skills
+                    <TabsTrigger value="skills" className="flex items-center justify-center gap-1 text-[10px] sm:text-xs md:text-sm py-2 px-1 sm:px-2">
+                      <Wrench className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <span className="hidden xs:inline sm:inline">Skills</span>
                     </TabsTrigger>
                   </TabsList>
 

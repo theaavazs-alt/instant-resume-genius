@@ -18,10 +18,10 @@ export const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass-strong">
-      <div className="container flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex items-center gap-2 group">
-          <img src={logo} alt="ResumeGenius Logo" className="w-10 h-10 rounded-xl" />
-          <span className="text-xl font-bold text-foreground">
+      <div className="container flex items-center justify-between h-14 sm:h-16 md:h-20 px-4 sm:px-6">
+        <Link to="/" className="flex items-center gap-1.5 sm:gap-2 group">
+          <img src={logo} alt="ResumeGenius Logo" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl" />
+          <span className="text-lg sm:text-xl font-bold text-foreground">
             Resume<span className="text-accent">Genius</span>
           </span>
         </Link>
