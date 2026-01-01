@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const navItems = [
   { label: "Resume Generator", href: "/generator" },
@@ -19,9 +20,7 @@ export const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 glass-strong">
       <div className="container flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center shadow-glow">
-            <Sparkles className="w-5 h-5 text-accent-foreground" />
-          </div>
+          <img src={logo} alt="ResumeGenius Logo" className="w-10 h-10 rounded-xl" />
           <span className="text-xl font-bold text-foreground">
             Resume<span className="text-accent">Genius</span>
           </span>
