@@ -162,19 +162,19 @@ const PhotoGenerator = () => {
                 {/* Style Selection */}
                 <div className="mt-6">
                   <h3 className="text-sm font-medium mb-3">Select Style</h3>
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3">
                     {photoStyles.map((style) => (
                       <button
                         key={style.id}
                         onClick={() => setSelectedStyle(style.id)}
-                        className={`p-3 rounded-lg border-2 text-center transition-all ${
+                        className={`p-2 sm:p-3 rounded-lg border-2 text-center transition-all min-w-0 ${
                           selectedStyle === style.id
                             ? "border-accent bg-accent/10"
                             : "border-border hover:border-accent/50"
                         }`}
                       >
-                        <p className="text-sm font-medium">{style.label}</p>
-                        <p className="text-xs text-muted-foreground">{style.description}</p>
+                        <p className="text-xs sm:text-sm font-medium truncate">{style.label}</p>
+                        <p className="text-[10px] sm:text-xs text-muted-foreground leading-tight">{style.description}</p>
                       </button>
                     ))}
                   </div>
