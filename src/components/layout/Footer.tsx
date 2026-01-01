@@ -9,18 +9,13 @@ const footerLinks = {
     { label: "Photo Generator", href: "/photo" },
     { label: "Cover Letter", href: "/cover-letter" },
   ],
-  company: [
-    { label: "About", href: "#" },
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-  ],
 };
 
 export const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
@@ -61,23 +56,6 @@ export const Footer = () => {
                   >
                     {link.label}
                   </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="font-semibold mb-4">Company</h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
                 </li>
               ))}
             </ul>
