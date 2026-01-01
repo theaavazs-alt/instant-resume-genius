@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Download, Sparkles, Plus, Trash2, Briefcase, GraduationCap, User, Wrench } from "lucide-react";
+import { FileText, Download, Sparkles, Plus, Trash2, Briefcase, GraduationCap, User, Wrench, Palette, Minimize2, Award, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import jsPDF from "jspdf";
@@ -413,19 +413,30 @@ const ResumeGenerator = () => {
 
                 {/* Style Selection */}
                 <div className="mt-8 pt-6 border-t border-border">
-                  <Label className="mb-3 block">Resume Style</Label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {["modern", "minimal", "professional"].map((style) => (
+                  <Label className="mb-4 block text-base font-semibold">Choose Resume Style</Label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {[
+                      { id: "modern", icon: Palette, label: "Modern", desc: "Clean & creative" },
+                      { id: "minimal", icon: Minimize2, label: "Minimal", desc: "Simple & elegant" },
+                      { id: "professional", icon: Award, label: "Professional", desc: "Classic & formal" },
+                    ].map((style) => (
                       <button
-                        key={style}
-                        onClick={() => setSelectedStyle(style)}
-                        className={`p-3 rounded-lg border-2 text-sm font-medium capitalize transition-all ${
-                          selectedStyle === style
-                            ? "border-accent bg-accent/10 text-accent"
-                            : "border-border hover:border-accent/50"
+                        key={style.id}
+                        onClick={() => setSelectedStyle(style.id)}
+                        className={`relative p-4 rounded-xl border-2 text-left transition-all duration-200 ${
+                          selectedStyle === style.id
+                            ? "border-accent bg-accent/10 shadow-lg shadow-accent/10"
+                            : "border-border hover:border-accent/50 hover:bg-secondary/50"
                         }`}
                       >
-                        {style}
+                        {selectedStyle === style.id && (
+                          <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-accent flex items-center justify-center">
+                            <Check className="w-3 h-3 text-accent-foreground" />
+                          </div>
+                        )}
+                        <style.icon className={`w-6 h-6 mb-2 ${selectedStyle === style.id ? "text-accent" : "text-muted-foreground"}`} />
+                        <p className={`font-semibold ${selectedStyle === style.id ? "text-accent" : "text-foreground"}`}>{style.label}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{style.desc}</p>
                       </button>
                     ))}
                   </div>
