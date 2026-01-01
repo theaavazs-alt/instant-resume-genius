@@ -5,11 +5,11 @@ import { FileText, Sparkles, Shield, Zap } from "lucide-react";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden gradient-bg">
+    <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center overflow-hidden gradient-bg">
       {/* Background Effects */}
       <div className="absolute inset-0 mesh-bg opacity-50" />
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse-soft" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
+      <div className="absolute top-1/4 -left-16 sm:-left-32 w-48 sm:w-96 h-48 sm:h-96 bg-accent/20 rounded-full blur-3xl animate-pulse-soft" />
+      <div className="absolute bottom-1/4 -right-16 sm:-right-32 w-48 sm:w-96 h-48 sm:h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
       
       {/* Floating Elements */}
       <motion.div
@@ -30,17 +30,17 @@ export const HeroSection = () => {
         <Sparkles className="w-8 h-8 text-accent" />
       </motion.div>
 
-      <div className="container relative z-10 py-20">
+      <div className="container relative z-10 py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/90 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/90 text-xs sm:text-sm font-medium mb-4 sm:mb-6"
           >
-            <Shield className="w-4 h-4" />
-            No signup required • 100% Free • Your data stays private
+            <Shield className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <span className="whitespace-nowrap">No signup • 100% Free • Private</span>
           </motion.div>
 
           {/* Headline */}
@@ -48,13 +48,13 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary-foreground mb-4 sm:mb-6 leading-tight px-2"
           >
             Create Your Perfect Resume with{" "}
-            <span className="relative">
+            <span className="relative inline-block">
               <span className="gradient-text">AI Power</span>
               <motion.span
-                className="absolute -bottom-2 left-0 right-0 h-1 bg-accent rounded-full"
+                className="absolute -bottom-1 sm:-bottom-2 left-0 right-0 h-0.5 sm:h-1 bg-accent rounded-full"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
@@ -67,7 +67,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-primary-foreground/70 mb-10 max-w-2xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-primary-foreground/70 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-2"
           >
             Generate ATS-optimized resumes, analyze your existing resume, create professional headshots, 
             and craft compelling cover letters — all in seconds.
@@ -78,16 +78,16 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-10 sm:mb-16 px-4"
           >
-            <Link to="/generator">
-              <Button variant="hero" size="xl" className="w-full sm:w-auto">
-                <Zap className="w-5 h-5" />
+            <Link to="/generator" className="w-full sm:w-auto">
+              <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm sm:text-base">
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
                 Build Your Resume
               </Button>
             </Link>
-            <Link to="/analyzer">
-              <Button variant="hero-outline" size="xl" className="w-full sm:w-auto">
+            <Link to="/analyzer" className="w-full sm:w-auto">
+              <Button variant="hero-outline" size="lg" className="w-full sm:w-auto text-sm sm:text-base">
                 Analyze Existing Resume
               </Button>
             </Link>
@@ -98,7 +98,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"
+            className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8"
           >
             {[
               { value: "Free", label: "Forever" },
@@ -106,10 +106,10 @@ export const HeroSection = () => {
               { value: "Instant", label: "Results" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-primary-foreground mb-1">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary-foreground mb-0.5 sm:mb-1">
                   {stat.value}
                 </div>
-                <div className="text-sm text-primary-foreground/60">{stat.label}</div>
+                <div className="text-xs sm:text-sm text-primary-foreground/60">{stat.label}</div>
               </div>
             ))}
           </motion.div>
