@@ -31,8 +31,8 @@ const benefits = [
 
 export const HowItWorksSection = () => {
   return (
-    <section className="py-20 md:py-28 bg-secondary/30">
-      <div className="container">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-secondary/30">
+      <div className="container px-4 sm:px-6">
         <SectionHeader
           badge="Simple Process"
           title="Create Your Resume in 3 Easy Steps"
@@ -40,7 +40,7 @@ export const HowItWorksSection = () => {
         />
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 md:gap-8 mb-12 sm:mb-16 md:mb-20">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
@@ -52,15 +52,15 @@ export const HowItWorksSection = () => {
             >
               {/* Connector Line */}
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-accent/50 to-transparent" />
+                <div className="hidden sm:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-accent/50 to-transparent" />
               )}
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-accent/10 text-accent text-2xl font-bold mb-4">
+                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-accent/10 text-accent text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
                   {step.number}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">{step.title}</h3>
+                <p className="text-sm sm:text-base text-muted-foreground">{step.description}</p>
               </div>
             </motion.div>
           ))}
@@ -73,15 +73,15 @@ export const HowItWorksSection = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-card rounded-2xl border border-border p-8 md:p-10 shadow-card">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-accent" />
+          <div className="bg-card rounded-xl sm:rounded-2xl border border-border p-5 sm:p-6 md:p-8 lg:p-10 shadow-card">
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-accent/10 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
               </div>
-              <h3 className="text-xl font-semibold">What You Get</h3>
+              <h3 className="text-lg sm:text-xl font-semibold">What You Get</h3>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {benefits.map((benefit, index) => (
                 <motion.div
                   key={benefit}
@@ -89,12 +89,12 @@ export const HowItWorksSection = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3"
+                  className="flex items-center gap-2 sm:gap-3"
                 >
-                  <div className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-3 h-3 text-accent" />
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+                    <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-accent" />
                   </div>
-                  <span className="text-foreground">{benefit}</span>
+                  <span className="text-sm sm:text-base text-foreground">{benefit}</span>
                 </motion.div>
               ))}
             </div>

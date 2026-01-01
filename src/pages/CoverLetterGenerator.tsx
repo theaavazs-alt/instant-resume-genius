@@ -104,40 +104,40 @@ const CoverLetterGenerator = () => {
 
   return (
     <Layout>
-      <section className="py-12 md:py-20">
-        <div className="container">
+      <section className="py-8 sm:py-12 md:py-20">
+        <div className="container px-4 sm:px-6">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto mb-12"
+            className="text-center max-w-3xl mx-auto mb-8 sm:mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
-              <Mail className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-accent/10 text-accent text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+              <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               AI Cover Letter Generator
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
               Create Compelling Cover Letters
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground">
               Generate personalized, professional cover letters tailored to any job.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             {/* Form Section */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
             >
-              <Card className="p-6 md:p-8">
-                <h2 className="text-xl font-semibold mb-6">Your Details</h2>
+              <Card className="p-4 sm:p-6 md:p-8">
+                <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Your Details</h2>
                 
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="fullName">Full Name *</Label>
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="space-y-1.5 sm:space-y-2">
+                      <Label htmlFor="fullName" className="text-sm">Full Name *</Label>
                       <Input
                         id="fullName"
                         placeholder="John Doe"
@@ -145,8 +145,8 @@ const CoverLetterGenerator = () => {
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                    <div className="space-y-1.5 sm:space-y-2">
+                      <Label htmlFor="email" className="text-sm">Email</Label>
                       <Input
                         id="email"
                         type="email"
@@ -157,9 +157,9 @@ const CoverLetterGenerator = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="jobTitle">Job Title *</Label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="space-y-1.5 sm:space-y-2">
+                      <Label htmlFor="jobTitle" className="text-sm">Job Title *</Label>
                       <Input
                         id="jobTitle"
                         placeholder="Software Engineer"
@@ -167,8 +167,8 @@ const CoverLetterGenerator = () => {
                         onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="companyName">Company Name *</Label>
+                    <div className="space-y-1.5 sm:space-y-2">
+                      <Label htmlFor="companyName" className="text-sm">Company Name *</Label>
                       <Input
                         id="companyName"
                         placeholder="Tech Company Inc."
@@ -178,8 +178,8 @@ const CoverLetterGenerator = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="skills">Key Skills</Label>
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <Label htmlFor="skills" className="text-sm">Key Skills</Label>
                     <Input
                       id="skills"
                       placeholder="JavaScript, React, Team Leadership..."
@@ -188,8 +188,8 @@ const CoverLetterGenerator = () => {
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="experience">Relevant Experience</Label>
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <Label htmlFor="experience" className="text-sm">Relevant Experience</Label>
                     <Textarea
                       id="experience"
                       placeholder="Brief description of your relevant experience..."
@@ -199,8 +199,8 @@ const CoverLetterGenerator = () => {
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="whyInterested">Why This Role?</Label>
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <Label htmlFor="whyInterested" className="text-sm">Why This Role?</Label>
                     <Textarea
                       id="whyInterested"
                       placeholder="What draws you to this company/role..."
@@ -214,7 +214,7 @@ const CoverLetterGenerator = () => {
                 <Button
                   onClick={generateCoverLetter}
                   disabled={isGenerating}
-                  className="w-full mt-6"
+                  className="w-full mt-4 sm:mt-6"
                   variant="accent"
                   size="lg"
                 >
@@ -240,31 +240,31 @@ const CoverLetterGenerator = () => {
               transition={{ delay: 0.2 }}
               className="lg:sticky lg:top-24 lg:self-start"
             >
-              <Card className="p-6 md:p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold">Preview</h2>
+              <Card className="p-4 sm:p-6 md:p-8">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+                  <h2 className="text-lg sm:text-xl font-semibold">Preview</h2>
                   {generatedLetter && (
                     <div className="flex gap-2">
                       <Button onClick={copyToClipboard} variant="outline" size="sm">
                         {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       </Button>
                       <Button onClick={downloadLetter} variant="accent" size="sm">
-                        <Download className="w-4 h-4 mr-2" />
-                        Download
+                        <Download className="w-4 h-4 sm:mr-2" />
+                        <span className="hidden sm:inline">Download</span>
                       </Button>
                     </div>
                   )}
                 </div>
 
                 {generatedLetter ? (
-                  <div className="bg-secondary/30 rounded-lg p-6 whitespace-pre-wrap text-sm leading-relaxed max-h-[600px] overflow-auto">
+                  <div className="bg-secondary/30 rounded-lg p-4 sm:p-6 whitespace-pre-wrap text-xs sm:text-sm leading-relaxed max-h-[400px] sm:max-h-[600px] overflow-auto">
                     {generatedLetter}
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center justify-center h-[400px] text-center text-muted-foreground">
-                    <FileText className="w-16 h-16 mb-4 opacity-20" />
-                    <p className="text-lg font-medium mb-2">No Letter Yet</p>
-                    <p className="text-sm">
+                  <div className="flex flex-col items-center justify-center h-[300px] sm:h-[400px] text-center text-muted-foreground">
+                    <FileText className="w-12 h-12 sm:w-16 sm:h-16 mb-3 sm:mb-4 opacity-20" />
+                    <p className="text-base sm:text-lg font-medium mb-1 sm:mb-2">No Letter Yet</p>
+                    <p className="text-xs sm:text-sm">
                       Fill in the details and click "Generate" to create your cover letter.
                     </p>
                   </div>

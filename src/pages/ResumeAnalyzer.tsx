@@ -137,59 +137,59 @@ const ResumeAnalyzer = () => {
 
   return (
     <Layout>
-      <section className="py-12 md:py-20">
-        <div className="container">
+      <section className="py-8 sm:py-12 md:py-20">
+        <div className="container px-4 sm:px-6">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto mb-12"
+            className="text-center max-w-3xl mx-auto mb-8 sm:mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
-              <Search className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-accent/10 text-accent text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+              <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               AI Resume Analyzer
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
               Analyze Your Resume
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground">
               Get instant feedback on ATS compatibility, keywords, grammar, and formatting.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             {/* Upload Section */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
             >
-              <Card className="p-6 md:p-8">
-                <h2 className="text-xl font-semibold mb-6">Upload Your Resume</h2>
+              <Card className="p-4 sm:p-6 md:p-8">
+                <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Upload Your Resume</h2>
                 
                 <div
                   {...getRootProps()}
-                  className={`border-2 border-dashed rounded-xl p-8 md:p-12 text-center cursor-pointer transition-all ${
+                  className={`border-2 border-dashed rounded-xl p-6 sm:p-8 md:p-12 text-center cursor-pointer transition-all ${
                     isDragActive
                       ? "border-accent bg-accent/5"
                       : "border-border hover:border-accent/50 hover:bg-secondary/30"
                   }`}
                 >
                   <input {...getInputProps()} />
-                  <Upload className={`w-12 h-12 mx-auto mb-4 ${isDragActive ? "text-accent" : "text-muted-foreground"}`} />
+                  <Upload className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 ${isDragActive ? "text-accent" : "text-muted-foreground"}`} />
                   {file ? (
                     <div>
-                      <p className="text-lg font-medium mb-1">{file.name}</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-base sm:text-lg font-medium mb-1 break-all">{file.name}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">
                         {(file.size / 1024).toFixed(1)} KB
                       </p>
                     </div>
                   ) : (
                     <div>
-                      <p className="text-lg font-medium mb-1">
+                      <p className="text-base sm:text-lg font-medium mb-1">
                         {isDragActive ? "Drop your resume here" : "Drag & drop your resume"}
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs sm:text-sm text-muted-foreground">
                         or click to browse (TXT, PDF, DOC, DOCX)
                       </p>
                     </div>
@@ -199,7 +199,7 @@ const ResumeAnalyzer = () => {
                 <Button
                   onClick={analyzeResume}
                   disabled={!file || isAnalyzing}
-                  className="w-full mt-6"
+                  className="w-full mt-4 sm:mt-6"
                   variant="accent"
                   size="lg"
                 >
@@ -216,7 +216,7 @@ const ResumeAnalyzer = () => {
                   )}
                 </Button>
 
-                <p className="text-sm text-muted-foreground text-center mt-4">
+                <p className="text-xs sm:text-sm text-muted-foreground text-center mt-3 sm:mt-4">
                   Your file is processed securely and never stored.
                 </p>
               </Card>
@@ -228,46 +228,46 @@ const ResumeAnalyzer = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <Card className="p-6 md:p-8">
-                <h2 className="text-xl font-semibold mb-6">Analysis Results</h2>
+              <Card className="p-4 sm:p-6 md:p-8">
+                <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Analysis Results</h2>
 
                 {analysisResult ? (
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {/* Overall ATS Score */}
-                    <div className="text-center p-6 bg-secondary/30 rounded-xl">
-                      <p className="text-sm text-muted-foreground mb-2">ATS Compatibility Score</p>
-                      <p className={`text-5xl font-bold ${getScoreColor(analysisResult.atsScore)}`}>
+                    <div className="text-center p-4 sm:p-6 bg-secondary/30 rounded-xl">
+                      <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">ATS Compatibility Score</p>
+                      <p className={`text-4xl sm:text-5xl font-bold ${getScoreColor(analysisResult.atsScore)}`}>
                         {analysisResult.atsScore}%
                       </p>
                     </div>
 
                     {/* Keywords */}
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       <div className="flex items-center gap-2">
-                        <Target className="w-5 h-5 text-accent" />
-                        <span className="font-medium">Keywords ({analysisResult.keywords.score}%)</span>
+                        <Target className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
+                        <span className="text-sm sm:text-base font-medium">Keywords ({analysisResult.keywords.score}%)</span>
                       </div>
                       <Progress value={analysisResult.keywords.score} className="h-2" />
-                      <div className="grid grid-cols-2 gap-4 mt-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-2 sm:mt-3">
                         <div>
-                          <p className="text-sm font-medium text-green-600 mb-2 flex items-center gap-1">
-                            <CheckCircle className="w-4 h-4" /> Found
+                          <p className="text-xs sm:text-sm font-medium text-green-600 mb-1.5 sm:mb-2 flex items-center gap-1">
+                            <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Found
                           </p>
                           <div className="flex flex-wrap gap-1">
                             {analysisResult.keywords.found.map(kw => (
-                              <span key={kw} className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+                              <span key={kw} className="px-2 py-0.5 sm:py-1 bg-green-100 text-green-700 text-[10px] sm:text-xs rounded-full">
                                 {kw}
                               </span>
                             ))}
                           </div>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-yellow-600 mb-2 flex items-center gap-1">
-                            <AlertCircle className="w-4 h-4" /> Missing
+                          <p className="text-xs sm:text-sm font-medium text-yellow-600 mb-1.5 sm:mb-2 flex items-center gap-1">
+                            <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Missing
                           </p>
                           <div className="flex flex-wrap gap-1">
                             {analysisResult.keywords.missing.map(kw => (
-                              <span key={kw} className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full">
+                              <span key={kw} className="px-2 py-0.5 sm:py-1 bg-yellow-100 text-yellow-700 text-[10px] sm:text-xs rounded-full">
                                 {kw}
                               </span>
                             ))}
@@ -277,16 +277,16 @@ const ResumeAnalyzer = () => {
                     </div>
 
                     {/* Grammar */}
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       <div className="flex items-center gap-2">
-                        <Type className="w-5 h-5 text-accent" />
-                        <span className="font-medium">Grammar & Clarity ({analysisResult.grammar.score}%)</span>
+                        <Type className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
+                        <span className="text-sm sm:text-base font-medium">Grammar & Clarity ({analysisResult.grammar.score}%)</span>
                       </div>
                       <Progress value={analysisResult.grammar.score} className="h-2" />
-                      <ul className="space-y-2 mt-3">
+                      <ul className="space-y-1.5 sm:space-y-2 mt-2 sm:mt-3">
                         {analysisResult.grammar.issues.map((issue, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <Lightbulb className="w-4 h-4 text-yellow-500 flex-shrink-0 mt-0.5" />
+                          <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+                            <Lightbulb className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-500 flex-shrink-0 mt-0.5" />
                             {issue}
                           </li>
                         ))}
@@ -294,16 +294,16 @@ const ResumeAnalyzer = () => {
                     </div>
 
                     {/* Formatting */}
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       <div className="flex items-center gap-2">
-                        <LayoutTemplate className="w-5 h-5 text-accent" />
-                        <span className="font-medium">Formatting ({analysisResult.formatting.score}%)</span>
+                        <LayoutTemplate className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
+                        <span className="text-sm sm:text-base font-medium">Formatting ({analysisResult.formatting.score}%)</span>
                       </div>
                       <Progress value={analysisResult.formatting.score} className="h-2" />
-                      <ul className="space-y-2 mt-3">
+                      <ul className="space-y-1.5 sm:space-y-2 mt-2 sm:mt-3">
                         {analysisResult.formatting.suggestions.map((suggestion, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <Lightbulb className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                          <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+                            <Lightbulb className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent flex-shrink-0 mt-0.5" />
                             {suggestion}
                           </li>
                         ))}
@@ -311,10 +311,10 @@ const ResumeAnalyzer = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center justify-center h-[400px] text-center text-muted-foreground">
-                    <FileText className="w-16 h-16 mb-4 opacity-20" />
-                    <p className="text-lg font-medium mb-2">No Analysis Yet</p>
-                    <p className="text-sm">
+                  <div className="flex flex-col items-center justify-center h-[300px] sm:h-[400px] text-center text-muted-foreground">
+                    <FileText className="w-12 h-12 sm:w-16 sm:h-16 mb-3 sm:mb-4 opacity-20" />
+                    <p className="text-base sm:text-lg font-medium mb-1 sm:mb-2">No Analysis Yet</p>
+                    <p className="text-xs sm:text-sm">
                       Upload your resume and click "Analyze" to get detailed feedback.
                     </p>
                   </div>
