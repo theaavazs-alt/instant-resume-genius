@@ -37,10 +37,10 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/90 text-xs sm:text-sm font-medium mb-4 sm:mb-6"
+            className="inline-flex flex-wrap justify-center items-center gap-x-2 gap-y-1 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/90 text-xs sm:text-sm font-medium mb-4 sm:mb-6 text-center"
           >
             <Shield className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-            <span className="whitespace-nowrap">No signup • 100% Free • Private</span>
+            <span>No signup • 100% Free • Private</span>
           </motion.div>
 
           {/* Headline */}
@@ -48,7 +48,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary-foreground mb-4 sm:mb-6 leading-tight px-2"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary-foreground mb-4 sm:mb-6 leading-tight px-2 break-words"
           >
             Create Your Perfect Resume with{" "}
             <span className="relative inline-block">
