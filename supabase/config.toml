@@ -1,0 +1,7 @@
+project_id = "kucpsuqirqbnlbjlyhlv"
+
+[functions.resume-ai]
+verify_jwt = false
+
+[functions.generate-photo]
+verify_jwt = false

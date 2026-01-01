@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, Download, Sparkles, Plus, Trash2, Briefcase, GraduationCap, User, Wrench } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import jsPDF from "jspdf";
 
 interface Experience {
@@ -104,40 +105,42 @@ const ResumeGenerator = () => {
 
     setIsGenerating(true);
     
-    // Simulate AI generation (will be replaced with actual API call)
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    const resumeContent = `
-${formData.fullName.toUpperCase()}
-${formData.email} | ${formData.phone} | ${formData.location}
+    try {
+      const { data, error } = await supabase.functions.invoke('resume-ai', {
+        body: {
+          type: 'generate-resume',
+          data: {
+            ...formData,
+            experiences,
+            education,
+            style: selectedStyle,
+          }
+        }
+      });
 
-PROFESSIONAL SUMMARY
-${formData.summary || "Results-driven professional with a proven track record of delivering exceptional outcomes."}
+      if (error) throw error;
 
-EXPERIENCE
-${experiences.map(exp => `
-${exp.title} at ${exp.company}
-${exp.duration}
-${exp.description}
-`).join("\n")}
+      if (data.error) {
+        throw new Error(data.error);
+      }
 
-EDUCATION
-${education.map(edu => `
-${edu.degree}
-${edu.school} - ${edu.year}
-`).join("\n")}
-
-SKILLS
-${formData.skills}
-    `;
-    
-    setGeneratedResume(resumeContent);
-    setIsGenerating(false);
-    
-    toast({
-      title: "Resume Generated!",
-      description: "Your ATS-optimized resume is ready for download.",
-    });
+      setGeneratedResume(data.result);
+      
+      toast({
+        title: "Resume Generated!",
+        description: "Your ATS-optimized resume is ready for download.",
+      });
+    } catch (error: unknown) {
+      console.error('Error generating resume:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to generate resume';
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const downloadPDF = () => {
@@ -150,10 +153,10 @@ ${formData.skills}
     pdf.setFont("helvetica", "normal");
     
     lines.forEach((line) => {
-      if (line.trim() === formData.fullName.toUpperCase()) {
+      if (line.trim() === formData.fullName.toUpperCase() || line.includes(formData.fullName)) {
         pdf.setFontSize(18);
         pdf.setFont("helvetica", "bold");
-      } else if (line === line.toUpperCase() && line.trim().length > 0) {
+      } else if (line === line.toUpperCase() && line.trim().length > 0 && line.trim().length < 30) {
         pdf.setFontSize(12);
         pdf.setFont("helvetica", "bold");
         y += 5;
@@ -438,7 +441,7 @@ ${formData.skills}
                   {isGenerating ? (
                     <>
                       <div className="w-4 h-4 border-2 border-accent-foreground/30 border-t-accent-foreground rounded-full animate-spin" />
-                      Generating...
+                      Generating with AI...
                     </>
                   ) : (
                     <>

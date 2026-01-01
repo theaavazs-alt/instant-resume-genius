@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Camera, Upload, Download, Sparkles, Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const photoStyles = [
   { id: "professional", label: "Professional", description: "Clean corporate look" },
@@ -44,21 +45,48 @@ const PhotoGenerator = () => {
   });
 
   const generatePhoto = async () => {
-    if (!file) return;
+    if (!file || !preview) return;
 
     setIsGenerating(true);
 
-    // Simulate AI generation (will be replaced with actual API call)
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-photo', {
+        body: {
+          imageBase64: preview,
+          style: selectedStyle,
+        }
+      });
 
-    // For demo, use the original image as "generated"
-    setGeneratedImage(preview);
-    setIsGenerating(false);
+      if (error) throw error;
 
-    toast({
-      title: "Photo Generated!",
-      description: "Your professional headshot is ready for download.",
-    });
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      setGeneratedImage(data.image);
+      
+      if (data.message) {
+        toast({
+          title: "Photo Processed",
+          description: data.message,
+        });
+      } else {
+        toast({
+          title: "Photo Generated!",
+          description: "Your professional headshot is ready for download.",
+        });
+      }
+    } catch (error: unknown) {
+      console.error('Error generating photo:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to generate photo';
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const downloadImage = () => {
@@ -162,7 +190,7 @@ const PhotoGenerator = () => {
                   {isGenerating ? (
                     <>
                       <div className="w-4 h-4 border-2 border-accent-foreground/30 border-t-accent-foreground rounded-full animate-spin" />
-                      Generating...
+                      Generating with AI...
                     </>
                   ) : (
                     <>
