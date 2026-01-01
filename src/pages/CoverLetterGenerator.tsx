@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Mail, Download, Sparkles, FileText, Copy, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const CoverLetterGenerator = () => {
   const { toast } = useToast();
@@ -37,30 +38,37 @@ const CoverLetterGenerator = () => {
 
     setIsGenerating(true);
     
-    // Simulate AI generation (will be replaced with actual API call)
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    const letterContent = `Dear Hiring Manager,
+    try {
+      const { data, error } = await supabase.functions.invoke('resume-ai', {
+        body: {
+          type: 'generate-cover-letter',
+          data: formData
+        }
+      });
 
-I am writing to express my strong interest in the ${formData.jobTitle} position at ${formData.companyName}. With my background in ${formData.skills || "relevant skills"} and experience in ${formData.experience || "the industry"}, I am confident I would be a valuable addition to your team.
+      if (error) throw error;
 
-${formData.whyInterested || `I am particularly drawn to ${formData.companyName} because of its reputation for excellence and innovation in the industry.`}
+      if (data.error) {
+        throw new Error(data.error);
+      }
 
-Throughout my career, I have demonstrated a commitment to delivering high-quality work and achieving results. I am skilled in problem-solving, communication, and collaboration—all qualities that would serve me well in this role.
-
-I would welcome the opportunity to discuss how my experience and skills align with your needs. Thank you for considering my application.
-
-Sincerely,
-${formData.fullName}
-${formData.email}`;
-    
-    setGeneratedLetter(letterContent);
-    setIsGenerating(false);
-    
-    toast({
-      title: "Cover Letter Generated!",
-      description: "Your personalized cover letter is ready.",
-    });
+      setGeneratedLetter(data.result);
+      
+      toast({
+        title: "Cover Letter Generated!",
+        description: "Your personalized cover letter is ready.",
+      });
+    } catch (error: unknown) {
+      console.error('Error generating cover letter:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to generate cover letter';
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const copyToClipboard = async () => {
@@ -213,7 +221,7 @@ ${formData.email}`;
                   {isGenerating ? (
                     <>
                       <div className="w-4 h-4 border-2 border-accent-foreground/30 border-t-accent-foreground rounded-full animate-spin" />
-                      Generating...
+                      Generating with AI...
                     </>
                   ) : (
                     <>

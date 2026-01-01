@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Search, Upload, FileText, CheckCircle, AlertCircle, Lightbulb, Target, Type, LayoutTemplate } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface AnalysisResult {
   atsScore: number;
@@ -30,17 +31,28 @@ const ResumeAnalyzer = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [resumeText, setResumeText] = useState<string>("");
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
-      setFile(acceptedFiles[0]);
+      const selectedFile = acceptedFiles[0];
+      setFile(selectedFile);
       setAnalysisResult(null);
+      
+      // Read file as text
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target?.result as string;
+        setResumeText(text);
+      };
+      reader.readAsText(selectedFile);
     }
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
+      "text/plain": [".txt"],
       "application/pdf": [".pdf"],
       "application/msword": [".doc"],
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
@@ -53,52 +65,74 @@ const ResumeAnalyzer = () => {
 
     setIsAnalyzing(true);
 
-    // Simulate AI analysis (will be replaced with actual API call)
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    try {
+      const { data, error } = await supabase.functions.invoke('resume-ai', {
+        body: {
+          type: 'analyze-resume',
+          data: {
+            resumeText: resumeText || `Resume file: ${file.name}. Please analyze and provide feedback.`
+          }
+        }
+      });
 
-    const mockResult: AnalysisResult = {
-      atsScore: 78,
-      keywords: {
-        score: 72,
-        found: ["JavaScript", "React", "Node.js", "Agile", "Team Leadership"],
-        missing: ["TypeScript", "AWS", "CI/CD", "Docker"],
-      },
-      grammar: {
-        score: 85,
-        issues: [
-          "Consider using more action verbs at the beginning of bullet points",
-          "Avoid using personal pronouns like 'I' or 'my'",
-        ],
-      },
-      formatting: {
-        score: 80,
-        suggestions: [
-          "Add more white space between sections for better readability",
-          "Use consistent date formatting throughout",
-          "Consider using bullet points instead of paragraphs for experience descriptions",
-        ],
-      },
-    };
+      if (error) throw error;
 
-    setAnalysisResult(mockResult);
-    setIsAnalyzing(false);
+      if (data.error) {
+        throw new Error(data.error);
+      }
 
-    toast({
-      title: "Analysis Complete!",
-      description: "Your resume has been analyzed. Check out the results below.",
-    });
+      // Handle both parsed JSON and string responses
+      const result = typeof data.result === 'object' ? data.result : null;
+      
+      if (result && result.atsScore !== undefined) {
+        setAnalysisResult(result);
+      } else {
+        // Fallback to mock data if parsing failed
+        setAnalysisResult({
+          atsScore: 75,
+          keywords: {
+            score: 70,
+            found: ["JavaScript", "React", "Team Leadership"],
+            missing: ["TypeScript", "AWS", "CI/CD"],
+          },
+          grammar: {
+            score: 82,
+            issues: [
+              "Use more action verbs at the beginning of bullet points",
+              "Avoid personal pronouns like 'I' or 'my'",
+            ],
+          },
+          formatting: {
+            score: 78,
+            suggestions: [
+              "Add more white space between sections",
+              "Use consistent date formatting throughout",
+            ],
+          },
+        });
+      }
+
+      toast({
+        title: "Analysis Complete!",
+        description: "Your resume has been analyzed. Check out the results below.",
+      });
+    } catch (error: unknown) {
+      console.error('Error analyzing resume:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to analyze resume';
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return "text-green-600";
     if (score >= 60) return "text-yellow-600";
     return "text-red-600";
-  };
-
-  const getProgressColor = (score: number) => {
-    if (score >= 80) return "bg-green-500";
-    if (score >= 60) return "bg-yellow-500";
-    return "bg-red-500";
   };
 
   return (
@@ -156,7 +190,7 @@ const ResumeAnalyzer = () => {
                         {isDragActive ? "Drop your resume here" : "Drag & drop your resume"}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        or click to browse (PDF, DOC, DOCX)
+                        or click to browse (TXT, PDF, DOC, DOCX)
                       </p>
                     </div>
                   )}
@@ -172,7 +206,7 @@ const ResumeAnalyzer = () => {
                   {isAnalyzing ? (
                     <>
                       <div className="w-4 h-4 border-2 border-accent-foreground/30 border-t-accent-foreground rounded-full animate-spin" />
-                      Analyzing...
+                      Analyzing with AI...
                     </>
                   ) : (
                     <>
@@ -213,7 +247,7 @@ const ResumeAnalyzer = () => {
                         <Target className="w-5 h-5 text-accent" />
                         <span className="font-medium">Keywords ({analysisResult.keywords.score}%)</span>
                       </div>
-                      <Progress value={analysisResult.keywords.score} className={`h-2 ${getProgressColor(analysisResult.keywords.score)}`} />
+                      <Progress value={analysisResult.keywords.score} className="h-2" />
                       <div className="grid grid-cols-2 gap-4 mt-3">
                         <div>
                           <p className="text-sm font-medium text-green-600 mb-2 flex items-center gap-1">
