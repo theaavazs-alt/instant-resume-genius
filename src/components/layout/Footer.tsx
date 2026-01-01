@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Sparkles, Github, Twitter, Linkedin } from "lucide-react";
+import { MessageCircle } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const footerLinks = {
   tools: [
@@ -23,9 +24,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-accent-foreground" />
-              </div>
+              <img src={logo} alt="ResumeGenius Logo" className="w-10 h-10 rounded-xl" />
               <span className="text-xl font-bold">
                 Resume<span className="text-accent">Genius</span>
               </span>
@@ -34,15 +33,18 @@ export const Footer = () => {
               Create stunning, ATS-optimized resumes in minutes. No signup required. 
               Your data stays private — nothing is stored.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="p-2 rounded-lg bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="p-2 rounded-lg bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="p-2 rounded-lg bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors">
-                <Github className="w-5 h-5" />
+            <div className="flex flex-col gap-2">
+              <p className="text-primary-foreground/80 text-sm font-medium">
+                Made by Shivam Choudhury
+              </p>
+              <a 
+                href="https://wa.me/919330249895" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-primary-foreground/70 hover:text-accent transition-colors text-sm"
+              >
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp: 9330249895
               </a>
             </div>
           </div>
@@ -84,7 +86,7 @@ export const Footer = () => {
 
         <div className="border-t border-primary-foreground/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-primary-foreground/60 text-sm">
-            © {new Date().getFullYear()} ResumeGenius. All rights reserved.
+            © {new Date().getFullYear()} ResumeGenius. Made by Shivam Choudhury.
           </p>
           <p className="text-primary-foreground/60 text-sm flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>

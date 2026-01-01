@@ -93,18 +93,17 @@ export const HeroSection = () => {
             </Link>
           </motion.div>
 
-          {/* Stats */}
+          {/* Features Highlight */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
+            className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"
           >
             {[
-              { value: "10K+", label: "Resumes Created" },
-              { value: "98%", label: "ATS Success Rate" },
-              { value: "100%", label: "Free Forever" },
-              { value: "0", label: "Data Stored" },
+              { value: "Free", label: "Forever" },
+              { value: "Zero", label: "Data Stored" },
+              { value: "Instant", label: "Results" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-primary-foreground mb-1">
